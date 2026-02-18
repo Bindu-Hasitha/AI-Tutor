@@ -206,7 +206,7 @@ def _run_query(*, typed_question: str, image_bytes: bytes) -> dict:
 
 
 def main() -> None:
-    st.set_page_config(page_title="RAG Q&A", page_icon="💬", layout="wide")
+    st.set_page_config(page_title="Turito AI", page_icon="💬", layout="wide")
     _ensure_session_state()
 
     st.title("Turito AI Tutor")
@@ -286,3 +286,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
