@@ -10,8 +10,9 @@ import vertexai
 from PIL import Image
 from vertexai import rag
 from vertexai.generative_models import GenerativeModel, Tool
+from google.oauth2 import service_account
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "videograph-ai-5666b2db80fa.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "videograph-ai-5666b2db80fa.json"
 
 MATHPIX_APP_ID = "turitoyvs_2d759a_2eca74"
 MATHPIX_API_KEY = "7b8c835a195e8dab5dcd8ee677017e9c93777376128cf8f37fc3a534fb8f5d34"
@@ -22,7 +23,15 @@ corpus_name = "projects/370739469923/locations/europe-west4/ragCorpora/461168601
 VERTEX_MODEL = "gemini-2.5-pro"
 VERTEX_TOP_K = 5
 
-vertexai.init(project=VERTEX_PROJECT, location=VERTEX_LOCATION)
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+
+vertexai.init(
+    project=VERTEX_PROJECT,
+    location=VERTEX_LOCATION,
+    credentials=credentials
+)
 
 
 def image_to_base64(image):
